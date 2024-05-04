@@ -1,0 +1,28 @@
+Mono 129 version INDEV cartrige
+helloworld
+igorecm
+_lua_
+--helloworld
+--igorecm
+
+function init()
+  rect(32,88,192,1,15)
+  text("<<Hello world!>>",64,96)
+  text("  From Mono 129",64,112)
+  rect(32,128,192,1,15)
+end
+
+function update()
+  
+end
+
+function draw()
+  
+end
+
+_luaend_
+_graph_
+eJxjYBgFo2AUjIJRMApGwUgDAAgAAAE=
+_map_
+eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB
+eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB
