@@ -1,0 +1,235 @@
+:root{
+	--editorWidth: calc(var(--vw, 1vw)* 100);
+	--editorHeight: calc(var(--vh, 1vh)* 100);
+	--editorScale: 2.0;
+}
+@font-face {
+	font-family: vga;
+	src: url(../fonts/IBM_VGA.ttf)
+}
+body {
+	width: 100%;
+	/*min-width: var(--editorWidth);*/
+	min-height: calc(var(--vh, 1vh)* 100);
+	background-color: #0a0a0a;
+	font-family: vga;
+	font-smooth: never;
+	color:white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+	-webkit-user-drag: none;
+	user-select:none;
+}
+button{
+	color:white;
+	padding: 0;
+	background-color: grey;
+	min-width:30px;
+	min-height:24px;
+	width:16px;
+	height:16px;
+	box-sizing: border-box;
+	border:6px;
+	margin:4px 1px;
+	border-radius: 4px;
+}
+
+button:disabled{
+	background-color: #484848;
+}
+button:active{
+	background-color: darkgrey;
+}
+
+a:link {
+  color: #00ffff;
+}
+
+a:visited {
+  color: #ff00ff;
+}
+
+img{
+	user-select:none;
+	user-drag: none;
+	-webkit-user-drag: none;
+	margin: 0px;
+	
+}
+ul{
+	padding-left:16px;
+}
+button > img{
+	width:16px;
+	height:16px;
+}
+
+.slider{
+	width:96px;
+	height: 16px;
+	margin: 8px;
+}
+.icon{
+	width:16px;
+	height:16px;
+}
+#main{
+	/*transform: scale(var(--editorScale));*/
+	display: flex;
+	flex-direction: row;
+}
+#editor{
+	min-height: var(--editorHeight);
+	min-width: var(--editorWidth);
+	/*height: var(--editorHeight);*/
+	width: var(--editorWidth);
+	font-size: 16px;
+	line-height: 16px;
+	background-color:#282828;
+	display: flex;
+	flex-direction: column;
+	margin: 0px;
+}
+#editor-upper-panel{
+	display: flex;
+	flex-direction: row;
+	height:16px;
+	background-color:#141414;
+}
+#editor-upper-panel-name{
+	width:100%;
+	margin:auto;
+	text-align: center;
+}
+#editor-upper-panel-version{
+	min-width:144px;
+}
+
+#editor-about{
+	margin: auto 16px;
+}
+#editor-code-ace{ 
+    width:var(--editorWidth);
+	height:calc(var(--editorHeight) - 64px);
+}
+.button-panel{
+	margin: 0px;
+	display: flex;
+	height:32px
+}
+#editor-spr{
+	margin: 0px calc((512px - var(--editorWidth)) / -2);
+}
+#editor-spr-num{
+	width:128px;
+	margin: auto 96px;
+	text-align: center;
+}
+#editor-spr-drawzone{
+	margin-left:32px;
+	margin-right:32px;
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+}
+#editor-spr-midzone{
+	display: flex;
+	height: calc(var(--editorHeight) - 224px);
+	align-items: center;
+}
+#editor-spr-buttons-l{
+	margin-left:64px;
+	width:96px;
+	height:128px;
+	display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+}
+#editor-spr-sprsel{
+	display: flex;
+	width: 100%;
+	height: 128px;
+	align-items: center;
+	justify-content: center;
+}
+#editor-spr-flags > input{
+	width:16px;
+	height:16px;
+	margin:0;
+}
+#editor-spr-flags{
+	margin:16px 0;
+	display:flex;
+}
+#editor-spr-buttons-d button{
+	min-width:22px;
+	border-radius: 4px 4px 0px 0px;
+	margin-top: auto;
+	margin-bottom: 0;
+}
+#editor-up-panel button{
+	/* width: 48px; */
+}
+#editor-play-zone{
+	width:  var(--editorWidth);
+	height: calc(var(--editorHeight) - 64px);
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#editor-params{
+	margin: 0px 16px;
+}
+#editor-params-body{
+	display: flex;
+}
+
+#editor-map-midzone{
+	display: flex;
+	width:var(--editorWidth);
+	height: calc(var(--editorHeight) - 224px);
+	overflow: auto;
+	/*align-items: center;*/
+	
+}
+#editor-map-editzone{
+	background-image: url("../gfx/tiledimg.png");
+	background-repeat: repeat;
+	background-size: 32px;
+}
+#editor-map-sprsel{
+	height: 128px;
+}
+#editor-map-cursor{
+	z-index:1;
+	position:absolute;
+	width:30px;
+	height:30px;
+	border: solid 2px red
+}
+#editor-map-d{
+	margin: 0px calc((512px - var(--editorWidth)) / -2);
+	height: 160px;
+}
+.push-left{
+	margin-left: auto;
+	display:flex;
+	text-align:right;
+}
+.push-down{
+	margin-left: auto;
+	display:flex;
+}
+.button-space{
+	min-width:32px;
+	min-height:32px;
+}

@@ -1,0 +1,310 @@
+<!--
+The Mono 129 editor 
+by igorecm (2024)
+yeah...
+what else to say
+the school is boring
+the life is boring 
+im boring
+-->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mono 129 editor</title>
+	<meta name="description" content="Tool for creating 1-bit games using Lua" />
+	<link rel="icon" type="image/x-icon" href="icons/favicon.png">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<div id="s">loading...</div>
+	<div id="mainh" hidden>
+		<div id="editor">
+			<div id="editor-upper-panel">
+				<img src="icons/logo.png" width="16" height="16">
+				<div style="min-width:128px">Mono 129</div>
+				<div id="editor-upper-panel-name"></div>
+				<div class="push-left">
+				<div id="editor-upper-panel-version">ver. 0.0.1.</div>
+				</div>
+			</div>
+			<div id="editor-up-panel">
+				<div class="button-panel">
+					<button title="new game" onclick=""><img src="icons/new.png"></button>
+					<button title="save" onclick="EDITOR.save()"><img src="icons/save.png"></button>
+					<button title="open" onclick="EDITOR.load()"><img src="icons/open.png"></button>
+					<button title="play" onclick="EDITOR.changePage('play')"><img src="icons/play.png"></button>
+					<button title="about" onclick="EDITOR.changePage('help')"><img src="icons/about.png"></button>
+					<div class="push-left">
+					<button title="params" onclick="EDITOR.changePage('params')"><img src="icons/params.png"></button>
+					<button title="script editor" onclick="EDITOR.changePage('code')"><img src="icons/codeedit.png"></button>
+					<button title="sprite editor" onclick="EDITOR.changePage('spr')"><img src="icons/spredit.png"></button>
+					<button title="map editor" onclick="EDITOR.changePage('map')"><img src="icons/mapedit.png"></button>
+					<button title="sound editor" onclick="EDITOR.changePage('sound')"><img src="icons/soundedit.png"></button>
+					</div>
+				</div>
+			</div>
+			<div id="editor-about">
+				<h3>welcome to Mono 129!!!</h3>
+				<p>press the 'new game' button (<img src="icons/new.png" class="icon">) to create a new project</p>
+				<div id="editor-about-text">
+				<h4>about</h4>
+				<p>mono 129 is a tool for creating 1-bit games using Lua, inspired by PICO-8 and the graphics of 80-s home computers, such as ZX Spectrum, Commodore 64, MSX, etc.</p>
+				<p><b>PLEASE AKNOWLEDGE THAT THE VERSION YOU ARE USING NOW IS NOT FINISHED</b></p>
+				
+				<h4>links</h4>
+				<ul>
+					<li>GitHub repo: <a href="https://github.com/igorecm/m129" target="_blank" rel="noopener noreferrer">(link)</a></li>
+					<li>Guides: not done yet, oof...</li>
+				</ul>
+				</div>
+			</div>
+			<div id="editor-nopage" hidden>
+				<p>Under construction!!!</p>
+			</div>
+			<div id="editor-spr" oncontextmenu="return false;" hidden>
+				<div id="editor-spr-midzone">
+					
+					<div id="editor-spr-buttons-l">
+						<button title="export" onclick="EDITOR.spr.exportPng()"><img src="icons/spredit_export.png"></button>
+						<button title="import" onclick="EDITOR.spr.importPng()"><img src="icons/spredit_import.png"></button>
+						<div class="button-space"></div>
+						<button title="cut" onclick="EDITOR.spr.cut()"><img src="icons/spredit_cut.png"></button>
+						<button title="copy" onclick="EDITOR.spr.copy()"><img src="icons/spredit_copy.png"></button>
+						<button title="paste" onclick="EDITOR.spr.paste()"><img src="icons/spredit_paste.png"></button>
+						<button title="undo" onclick="EDITOR.spr.undo()"><img src="icons/spredit_undo.png"></button>
+						<button title="redo" onclick="EDITOR.spr.redo()"><img src="icons/spredit_redo.png"></button>
+						<button title="clear sprite" onclick="EDITOR.spr.clear()"><img src="icons/spredit_clear.png"></button>
+						<button title="flip horizontally" onclick="EDITOR.spr.flip(1)"><img src="icons/spredit_fliph.png"></button>
+						<button title="flip vertically" onclick="EDITOR.spr.flip(-1)"><img src="icons/spredit_flipv.png"></button>
+						<button title="invert sprite" onclick="EDITOR.spr.invert()"><img src="icons/spredit_invert.png"></button>
+					</div>
+					<div id="editor-spr-drawzone">
+						<canvas id="sprdraw" width="128" height="128" oncontextmenu="return false;"></canvas>
+					</div>
+					<div id="editor-spr-sliders">
+						<div>
+							<img class="icon" src="icons/spredit_zoom.png"> 
+							<input 
+							type="range" id="editor-spr-zoom" class="slider" 
+							min="1" max="8" value="1"
+							oninput="EDITOR.spr.zoomSlider(this.value*8)"
+							>
+						</div>
+						<div>
+							<img class="icon" src="icons/spredit_drawsize.png">
+							<input 
+							type="range" id="editor-spr-zoom" class="slider" 
+							min="1" max="3" value="1"
+							oninput="EDITOR.spr.drawSize=this.value"
+							>
+						</div>
+						<div id="editor-spr-flags">
+							<input type="checkbox" id="flag0" onclick="EDITOR.spr.flagsUpd(0)">
+							<input type="checkbox" id="flag1" onclick="EDITOR.spr.flagsUpd(1)">
+							<input type="checkbox" id="flag2" onclick="EDITOR.spr.flagsUpd(2)">
+							<input type="checkbox" id="flag3" onclick="EDITOR.spr.flagsUpd(3)">
+							<input type="checkbox" id="flag4" onclick="EDITOR.spr.flagsUpd(4)">
+							<input type="checkbox" id="flag5" onclick="EDITOR.spr.flagsUpd(5)">
+							<input type="checkbox" id="flag6" onclick="EDITOR.spr.flagsUpd(6)">
+							<input type="checkbox" id="flag7" onclick="EDITOR.spr.flagsUpd(7)">
+						</div>
+					</div>
+				</div>
+				<div id="editor-spr-buttons-d">
+					<div class="button-panel">
+						<button title="sprite bank 1" onclick="EDITOR.spr.selSetBank(0)" disabled><img src="icons/spredit_num1.png"></button>
+						<button title="sprite bank 2" onclick="EDITOR.spr.selSetBank(1)"><img src="icons/spredit_num2.png"></button>
+						<button title="sprite bank 3" onclick="EDITOR.spr.selSetBank(2)"><img src="icons/spredit_num3.png"></button>
+						<button title="font (sprite bank 4)" onclick="EDITOR.spr.selSetBank(3)"><img src="icons/spredit_font.png"></button>
+						<div id="editor-spr-num">undefined</div>
+					</div>
+				</div>
+				<div id="editor-spr-sprsel">
+					<canvas id="sprsel" width="512" height="128"></canvas>
+				</div>
+			</div>
+			<div id="editor-code" hidden>
+				<div id="editor-code-ace"></div>
+				<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+				<script src="ace/ext-statusbar.js"></script>
+				<script src="ace/ext-language_tools.js"></script>
+				<script src="ace/ext-settings_menu.js"></script>
+				<div id="editor-code-statusbar"></div>
+			</div>
+			<div id="editor-params" hidden>
+				<div id="editor-params-body">
+					<div id="editor-params-params" style="width:50%;">
+						<p>game info:</p>
+						<p>title :
+						<input 
+							type="text" 
+							value="game" 
+							maxlength="16" 
+							id="title" 
+							onchange="EDITOR.game.title=this.value"
+						>
+						</p>
+						<p>
+						author:
+						<input 
+							type="text" 
+							value="author" 
+							maxlength="16" 
+							id="author"
+							onchange="EDITOR.game.author=this.value"
+						>
+						</p><br>
+						<p>window resolution:</p>
+						<input 
+							type="number" 
+							id="width" 
+							value="256" 
+							min="64" 
+							max="512" 
+							style="width:48px;"
+							onchange="this.value=clamp(this.min,this.value,this.max);EDITOR.game.width=this.value"
+						>
+						X
+						<input 
+							type="number" 
+							id="height" 
+							value="192" 
+							min="64" 
+							max="512" 
+							style="width:48px;"
+							onchange="this.value=clamp(this.min,this.value,this.max);EDITOR.game.height=this.value"
+						>
+						<br>
+						<p>text character size:</p>
+						<input 
+							type="number" 
+							id="chrW" 
+							value="8" 
+							min="4" 
+							max="8" 
+							style="width:48px;"
+							onchange="this.value=clamp(this.min,this.value,this.max);EDITOR.game.chrW=this.value"
+						>
+						X
+						<input 
+							type="number" 
+							id="chrH" 
+							value="8" 
+							min="4" 
+							max="8" 
+							style="width:48px;"
+							onchange="this.value=clamp(this.min,this.value,this.max);EDITOR.game.chrH=this.value"
+						>
+						<br>
+					</div>
+					<div id="editor-params-palette" style="width:50%;">
+						<p>palette size:
+						<select id="palSize" onchange="EDITOR.spr.palsize=this.value;EDITOR.palCreate(this.value,EDITOR.spr.pal)">
+							<option value="2">2</option>
+							<option value="4">4</option>
+							<option value="8">8</option>
+							<option value="16" selected="selected">16</option>
+						</select>
+						</p>
+						<div id="editor-palette" style="display:inline-grid;grid-template-columns: repeat(4, auto);">
+							
+						</div>
+						<br>
+						<br>
+						<input type="button" value="Load palette" onclick="EDITOR.palLoad()">
+						<input type="button" value="Save palette" onclick="EDITOR.palSave()">
+					</div>
+				</div>
+			</div>
+			<div id="editor-play" hidden>
+				<script src="js/libs/fengari-web.js"></script>
+				<script src="js/libs/pako.min.js"></script>
+				<script src="js/m129.js"></script>
+				<div id="editor-play-zone" hidden>
+					<div id="m129"></div>
+				</div>
+			</div>
+			<div id="editor-map" oncontextmenu="return false;" hidden>
+				<div id="editor-map-midzone" onscroll="EDITOR.map.onscroll(this)">
+					<div id="editor-map-editzone" style="min-width:4096px;min-height:2048px;">
+						<canvas id='editor-map-canvas' width="2048" height="1024" style="width:100%;height:100%" ></canvas>
+					</div>
+				</div>
+				<div id="editor-map-d">
+					<div id="editor-map-buttons-d">
+						<div class="button-panel">
+							
+						</div>
+					</div>
+					<div id="editor-map-sprsel">
+						<canvas id="sprsel_map" width="512" height="128"></canvas>
+					</div>
+				</div>
+				<div id="editor-map-statusbar">0:0</div>
+				
+			</div>
+			<!-- <div>
+				<textarea name="code" rows="10" cols="45"></textarea>
+			</div> -->
+			<div id="editor-help" style="border:none;overflow: clip;width:var(--editorWidth);height:calc(var(--editorHeight) - 48px);" hidden>
+				<iframe src="help/index.html" style="width:99.5%;height:98.45%;"></iframe>
+			</div>
+		</div>
+	</div>
+	<div id="debuggy"></div>
+	<script>
+		function detectIE() {
+			  var ua = window.navigator.userAgent;
+			  var msie = ua.indexOf('MSIE ');
+			  if (msie > 0) {
+				// IE 10 or older => return version number
+				return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+			  }
+
+			  var trident = ua.indexOf('Trident/');
+			  if (trident > 0) {
+				// IE 11 => return version number
+				var rv = ua.indexOf('rv:');
+				return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+			  }
+
+			  // other browser
+			  return false;
+		}
+		if(!detectIE()){
+			document.getElementById('mainh').hidden=false
+			document.getElementById('mainh').id='main'
+			document.getElementById('s').hidden=true
+		}else{
+			document.getElementById('s').innerHTML='<br><br>internet explorer is not supported lmao <br> go cry about it or something <br><br><br><image src="https://i.pinimg.com/736x/47/a8/7e/47a87e0aa9669e4113b0f048b98c354a.jpg"></image>'
+		};
+	</script>
+	
+	<script src="js/editor.js"></script>
+	<script>
+		var EDITOR = new m129Editor;
+		EDITOR.init();
+		
+		if(nw){
+			function setZoom(percent) {
+				nw.Window.get(window).zoomLevel = Math.log(percent/100.0) / Math.log(1.2);
+			}
+			setZoom(150)
+		}
+		
+		var mono={uninit:function(){},} //hack
+		
+		function ct(){ //compile test
+			EDITOR.compileGame();
+			return EDITOR.game
+		}
+	</script>
+</body>
+
+</html>

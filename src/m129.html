@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="Mono 129, the game maker powered by Lua" />
+  <title>m129</title>
+  <style>
+	body, html { 
+		width:  100%;
+		height: 100%;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #101010;
+		overflow-x: hidden;
+		image-rendering: -moz-crisp-edges;
+		image-rendering: -webkit-crisp-edges;
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
+	}
+	#gaem{
+		width:  100%;
+		height: 100%;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+  </style>
+  
+</head>
+
+<body>
+	<div id="gaem">
+		<div id="m129"></div>
+	</div>
+	<script src="js/fengari-web.js"></script>
+	<script src="js/pako.min.js"></script>
+	<script src="js/game.js"></script>
+	<script src="js/m129.js"></script>
+	<script>
+	var mono = new m129("m129",GAME)
+	mono.scale='auto'
+
+	//win some time for json to properly parse
+	/*setTimeout(function(){
+		mono.init();
+	},200)*/
+	mono.init()
+	</script>
+	
+</body>
+
+</html>

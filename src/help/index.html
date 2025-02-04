@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="igorecm's cool stuff" />
+	<title>m129 help</title>
+	<style>
+		@font-face {
+			font-family: vga;
+			src: url(../fonts/IBM_VGA.ttf);
+		}
+		body {
+			background-color:#eee;
+			font-family:vga;
+			font-size-adjust: 0.4;
+		}
+		img{
+			max-width:480px;
+			height:auto%;
+		}
+		.main{
+			margin: 32px 20%;
+		}
+		@media screen and (max-width: 720px) {
+			.main {
+			margin: 32px 0px
+			}
+		}
+	</style>
+
+</head>
+
+<body>
+	<h1><img src="logo.png" style="image-rendering: pixelated;width:32px;height:32px;"></img> Справка по Mono 129</h1>
+	<div class="main">
+	<h2>Содержание:</h2>
+		<ol>
+			<li><a href="#glava1">О приложении</a></li>
+			<li><a href="#glava2">Интерфейс приложения</a></li>
+			<ol>
+				<li><a href="#glava2_1">Верхняя панель</a></li>
+				<li><a href="#glava2_2">Настройки проекта</a></li>
+				<li><a href="#glava2_3">Редактор кода</a></li>
+				<li><a href="#glava2_4">Редактор графики</a></li>
+				<li><a href="#glava2_5">Редактор игрового поля</a></li>
+				<li><a href="#glava2_5">Редактор звуков</a></li>
+			</ol>
+			<li><a href="#glava3">Справка по скриптингу</a></li>
+			<li><a href="#glava4">Создание первой игры</a></li>
+		</ol>
+	<h2><a name="glava1">О приложении</a></h2>
+		<p> Mono 129 - это приложение, с помощью которого можно создавать небольшие игры с минималистичной крафикой, используя язык программирования Lua. Mono 129 уже включает в себя все инструменты, необходимые для создания игры, имеет простой, не перегруженный интерфейс. Подходит для начинающих программистов.</p>
+		<img src="mono129.png"></img>
+	<h2><a name="glava2">Интерфейс приложения</a></h2>
+		<h3><a name="glava2_1">Верхняя панель</a></h3>
+			<img  src="uppanel.png"></img>
+			<p>Кнопки (слева направо):</p>
+			<ol>
+				<li>Новый проект</li>
+				<li>Сохранить проект</li>
+				<li>Загрузить проект</li>
+				<li>Тест проекта</li>
+				<li>Справочное меню</li>
+				<br>
+				<li>Настройки проекта</li>
+				<li>Редактор кода</li>
+				<li>Редактор графики</li>
+				<li>Редактор игрового поля</li>
+				<li>Редактор звуков</li>
+			</ol>
+		<h3><a name="glava2_2">Настройки проекта</a></h3>
+			<img src="projsettings.png"></img>
+			<p>В данной вкладке можно изменить настройки проекта:</p>
+			<ul>
+				<li>Название игры и автор (title, author)</li>
+				<li>Разрешение экрана игры (window resolution) от 64х48 до 512х512, в пикселях </li>
+				<li>Размер текстового символа (text character size), в пикселях</li>
+				<li>Цветовая палитра</li>
+			</ul>
+		<h3><a name="glava2_3">Редактор кода</a></h3>
+			<img src="codeedit.png"></img>
+			<p>В данной вкладке можно редактировать код игрового проекта.</p>
+			<p>Горячие клавиши:</p>
+		<h3><a name="glava2_4">Редактор графики</a></h3>
+			<img src="spredit.png"></img>
+			<p>В данной вкладке можно редактировать спрайты и их флаги. Имеется 3 набора графики, которые можно подменять с помощью кода. 4-ый набор графики - шрифт текста</p>
+			<p>Управление:</p>
+			<ul>
+				<li>Левая Кнопка Мыши -- Рисовать</li>
+				<li>Правая Кнопка Мыши -- Стереть</li>
+				<li>Средняя Кнопка Мыши -- Переместить спрайт по зоне редактирования</li>
+				<li>F -- Изменить масштабирование</li>
+				<li>Delete -- Очистить зону редактирования</li>
+				<li>Ctrl+C -- Копировать зону редактирования</li>
+				<li>Ctrl+V -- Вставить</li>
+				<li>Ctrl+X -- Вырезать</li>
+				<li>Ctrl+Z -- Отмена</li>
+				<li>Ctrl+Y -- Повтор</li>
+				<li>Ctrl+S -- Сохранить набор графики полностью</li>
+				<li>Shift+I -- Инверсия цвета</li>
+				<li>Shift+H -- Отразить по вертикали</li>
+				<li>Shift+V -- Отразить по горизонтали</li>
+			</ul>
+	<h2><a name="glava3">Справка по скриптингу:</a></h2>
+		<h3><a name="glava3_1">События</a></h3>
+			<h4>update()</h4>
+			<p>Эта функция вызывается каждый кадр.</p>
+			<h4>draw()</h4>
+			<p>Эта функция также вызывается каждый кадр, но может быть пропущена, если функция update() заняла больше 1/60 секунды, с целью компенсации скорости.</p>
+		<h3><a name="glava3_2">Функции</a></h3>
+			<h4>cls(color)</h4>
+			<p>Очищает экран с заданным цветом</p>
+			<h4>spr(spr,x,y,*color,*width,*height,*flip_h,*flip_v)</h4>
+			<p>Отображает спрайт на экране</p>
+			<h4>tile(spr,x,y,*front_color,*back_color)</h4>
+			<p>Изменяет клетку игрового поля</p>
+			<h4>text(text,x,y,*front_color,*back_color,*wrap_lenght)</h4>
+			<p>Отображает текст на экране</p>
+			<h4>map(x,y,sx,sy,width,height)</h4>
+			<p>Отображает фрагмент игрового поля на экране</p>
+			<h4>key(key)</h4>
+			<p>Возвращает true если указанная клавиша нажата</p>
+			<h4>keyp(key)</h4>
+			<p>Возвращает true если указанная клавиша была только что нажата</p>
+			<h4></h4>
+			<p></p>
+			<h4></h4>
+			<p></p>
+			<h4></h4>
+			<p></p>
+			<h4>...</h4>
+			<p>...</p>
+	<h2><a name="glava4">Создание первой игры</a></h2>
+		<p><b>РАЗДЕЛ В РАЗРАБОТКЕ</b></p>
+	</div>
+
+</body>
+
+</html>
